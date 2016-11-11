@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Chat</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+	<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+		<div class="login white row middle-xs center-xs">
+				<div class="col-xs-12">
+						<div class="box">	
+						<p>	Antes de usar el chat debes iniciar sesión</p>
+						<button id="start-login" class="btn btn-raised red white-text">Inicia</button>
+						</div>	
+				</div>
+		</div>
+
+		<div class="app row">
+				<div class="col-md-3 col-xs-12">
+					<div class="box">
+						<div class="indigo white-text" style="padding:10px 15px">
+							Usuarios conectados
+						</div>
+						<ul class="colletion users"></ul>
+					</div>
+				</div>
+		</div>
+  	<!-- Compiled and minified JavaScript -->
+  	<script src="https://apis.google.com/js/platform.js" async defer></script> 
+  	<script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+  	<script type="text/javascript" src="./jquery-3.1.1.min.js"></script>    
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+ 	<script type="text/javascript" src="./main.js"></script>
+	
+</body>
+</html>
