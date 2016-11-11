@@ -16,6 +16,7 @@
   usuario = null;
   usuariosConectados = null;
   conectadoKey = null;
+  rooms = null;
 
   function googleLogin(){
   	var provider = new firebase.auth.GoogleAuthProvider();
@@ -28,6 +29,8 @@
 
   function initApp(){
   	usuariosConectados = dataBase.ref("/connected");
+  	rooms = dataBase.ref("/rooms");
+
   	login(user.uid, user.email || user.displayName  );
   	usuariosConectados.on("child_added", addUser);
   	usuariosConectados.on("child_removed", removeUser);
@@ -36,7 +39,7 @@
   function login(uid, nombre){
   	var conetado = usuariosConectados.push({
   		uid:uid,
-  		name:name
+  		name:nombre
   	});
 
   	conectadoKey = conetado.key 
@@ -47,15 +50,25 @@
   }
 
   function addUser(data){
+  	friend_id = data.val().uid;
   	var $li = $("<li>")
   		.addClass("collection-item")
   		.html(data.val().name)
-  		.attr("id",data.val().uid)
+  		.attr("id",friend_id)
   		.appendTo(".users");
+	
+	$li.on("click", function(){
+		var room = rooms.push({
+			creator:user.uid,
+			friend:friend_id
+		});
+	});
   }
 
   function removeUser(data){
-
+  	$("#"+data.val().uid).slideUp("fast", function (){
+  		$(this).remove();
+  	});
   }
 
 })()
