@@ -31,7 +31,7 @@
   	usuariosConectados = dataBase.ref("/connected");
   	rooms = dataBase.ref("/rooms");
 
-  	login(user.uid, user.email || user.displayName  );
+  	login(user.uid, user.displayName || user.email  );
   	usuariosConectados.on("child_added", addUser);
   	usuariosConectados.on("child_removed", removeUser);
 
@@ -53,6 +53,7 @@
   }
 
   function addUser(data){
+  	if (data.val().uid == user.uid) {return}
   	friend_id = data.val().uid;
   	var $li = $("<li>")
   		.addClass("collection-item")
@@ -65,7 +66,7 @@
 			creator: user.uid,
 			friend: friend_id
 		});
-		new Chat(room.key, user, "chats", dataBase)
+		//new Chat(room.key, user, "chats", dataBase)
 	});
   }
 
@@ -77,6 +78,9 @@
 
   function newRoom(data){
   	if (data.val().friend == user.uid) {
+  		new Chat(data.key, user, "chats", dataBase)
+  	}
+ 	if (data.val().creator == user.uid) {
   		new Chat(data.key, user, "chats", dataBase)
   	}
   }
